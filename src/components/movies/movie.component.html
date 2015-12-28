@@ -1,0 +1,106 @@
+<mdb-backdrop [path]="movie.backdrop_path" *ngIf="movie.backdrop_path"></mdb-backdrop>
+
+<div class="container" mdb-loading [loading]="loading" id="movie-container" *ngIf="movie">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1 class="page-header">{{movie.title}} 
+        <em class="small" *ngIf="movie.release_date">({{movie.release_date}})</em>
+        <em class="small" *ngIf="!movie.release_date && movie.status">({{movie.status}})</em>
+        <span *ngIf="movie.popularity > 40" class="glyphicon glyphicon-fire popularity-icon pull-right" style="color:orange"></span>
+      </h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="hidden-xs col-sm-3 col-md-3 col-lg-3">
+      <div class="movie-poster">
+        <img *ngIf="movie.poster_path" class="media-object" width="300" src="{{API_SETTINGS.baseImageUrl}}w300/{{movie.poster_path}}" alt="{{movie.title}}">
+
+        <!-- <img mdb-image-holder="holder.js/300x450?auto=yes&theme=sky&text={{movie.title}}" alt="{{movie.title}}" *ngIf="!movie.poster_path && movie.title"> -->
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+      <div class="row">
+        <div class="col-sm-12">
+          <a href="movies/genre/{{genre.id}}" *ngFor="#genre of movie.genres" style="display:inline-block; margin:0 5px 10px 0;">
+            <h4 class="label label-primary" style="font-size: 100%;">{{genre.name}}</h4>
+          </a>
+          <hr style="margin: 10px 0;">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8 col-xs-6 col-sm-7 col-xxs-12">
+          <p *ngIf="movie.tagline" class="text-upper text-bold text-xl">{{movie.tagline}}</p>
+          <p *ngIf="movie.overview" style="font-size: 1.1em;">{{movie.overview}}</p>
+          <em *ngIf="!movie.overview">No movie synopsis available</em>
+        </div>
+        <div class="col-md-4 col-xs-6 col-sm-5 col-xxs-12">
+          <div class="text-center" style="background-color: rgba(223, 105, 26, 0.6); padding: 20px;">
+            <p class="text-bold" style="font-size: 6.3em; margin:0;">{{movie.vote_average}}</p>
+            <p class="text-upper small" style="margin:0;">From {{movie.vote_count}} votes</p>
+          </div>
+
+          <div class="text-center" style="background-color: rgba(223, 105, 26, 0.6); padding: 15px; border-top: 1px solid white;">
+            <uib-rating *ngIf="user && user.id" ng-model="movie.account_states.rated.value" max="10" ng-change="ratingChanged()"></uib-rating>
+            <uib-rating ng-hide="user && user.id" readonly=true ng-model="nothing" max="10"></uib-rating>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <hr>
+          <div class="row">
+            <div class="col-xs-6 col-sm-3 col-md-4">
+              <p class="text-upper">Directed by</p>
+              <p *ngFor="#director of movie.directors">
+                <a href="person/{{director.id}}">{{director.name}}</a>
+              </p>
+              <p *ngIf="!movie.directors" class="text-muted">Not available</p>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-4">
+              <p class="text-upper">Written by</p>
+              <p *ngFor="#writer of movie.writers">
+                <a href="person/{{writer.id}}">{{writer.name}} <em>({{writer.job}})</em></a>
+              </p>
+              <p *ngIf="!movie.writers" class="text-muted">Not available</p>
+            </div>
+            <div class="col-xs-12 col-sm-5 col-md-4">
+              <button *ngIf="!movie.account_states || !movie.account_states.watchlist" ng-click="toggleWatchlist()" class="btn btn-block btn-lg btn-success"><i class="fa fa-plus"></i> My Watchlist</button>
+              <button *ngIf="movie.account_states && movie.account_states.watchlist" ng-click="toggleWatchlist()" class="btn btn-block btn-lg btn-warning"><i class="fa fa-minus"></i> My Watchlist</button>
+
+              <button *ngIf="!movie.account_states || !movie.account_states.favorite" ng-click="toggleFavorite()" class="btn btn-block btn-lg btn-success"><i class="fa fa-plus"></i> My Favorites</button>
+              <button *ngIf="movie.account_states && movie.account_states.favorite" ng-click="toggleFavorite()" class="btn btn-block btn-lg btn-warning"><i class="fa fa-minus"></i> My Favorites</button>
+
+              <button ng-click="playTrailer()" *ngIf="true" class="btn btn-block btn-lg btn-info"><i class="fa fa-video-camera"></i> Watch Trailer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+     
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <h2 class="page-header">Cast</h2>
+    </div>
+  </div>
+  <div class="row">
+<!--     <div class="col-sm-4 col-xs-6 col-md-3" style="margin-bottom:30px;" *ngFor="#actor of movie.credits.cast">
+      <div class="media">
+        <div class="pull-left">
+          <a href="person/{{actor.id}}">
+            <img *ngIf="actor.profile_path" class="media-object" width="92" height="138" src="{{API_SETTINGS.baseImageUrl}}w92/{{actor.profile_path}}" alt="{{actor.name}}">
+          </a>
+        </div>
+        <div class="media-body">
+          <a href="person/{{actor.id}}">
+            <p class="h4" style="margin:0 0 5px 0; word-break: break-word;">{{actor.name}}</p>
+          </a>
+          <p *ngIf="actor.character" class="small text-muted">{{actor.character}}</p>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</div>

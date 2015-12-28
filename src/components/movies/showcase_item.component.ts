@@ -1,11 +1,13 @@
 import {Component, Input, ChangeDetectionStrategy} from 'angular2/core';
+import {RouterLink} from 'angular2/router';
 import * as AppConstants from '../app/app.constants';
 
 @Component({
   selector: 'mdb-showcase-item',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  directives: [RouterLink],
   template: `
-    <a href="movie/{{item.id}}" class="showcase-item" [ngClass]="classes">
+    <a [routerLink]="['Movie', { id: item.id }]" class="showcase-item" [ngClass]="classes">
       <div class="background" [ngStyle]="getBackgroundImage()"></div>
       <div class="contents">  
         <h3 class="item-title">{{item.title}}</h3>

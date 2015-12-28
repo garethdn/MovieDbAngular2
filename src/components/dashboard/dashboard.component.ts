@@ -1,14 +1,12 @@
 import {Component, OnInit} from 'angular2/core';
-import {NgFor} from 'angular2/common';
-import {Router, RouteParams} from 'angular2/router';
 import {MoviesService} from '../movies/movies.service';
 import {ShowcaseItemComponent} from  '../movies/showcase_item.component';
-import {LoadingDirective} from '../common/loading/loading.directive';
+import {LoadingComponent} from '../common/loading/loading.component';
 
 @Component({
   selector: 'dashboard',
   templateUrl: 'dist/components/dashboard/dashboard.component.html',
-  directives: [ShowcaseItemComponent, NgFor, LoadingDirective]
+  directives: [ShowcaseItemComponent, LoadingComponent]
 })
 export class DashboardComponent implements OnInit {
 
@@ -16,12 +14,11 @@ export class DashboardComponent implements OnInit {
   highestRatedMovies: any[] = [];
   loading: Boolean = false;
 
-  constructor(
-    public routeParams:RouteParams, 
-    public router:Router,
-    private _moviesService: MoviesService) { }
+  constructor(private _moviesService: MoviesService) { }
 
   ngOnInit() {
+    console.log('in dashboard');
+
     this.loading = true;
 
     this._moviesService.getMovies('popular').subscribe(res => {
