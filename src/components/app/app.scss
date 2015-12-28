@@ -1,0 +1,85 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+[ng-click],
+[data-ng-click],
+[x-ng-click] {
+  cursor: pointer;
+}
+
+button, a {
+  
+  .fa {
+    padding: 0 5px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .container {
+    width: 100%;
+  }
+}
+
+.navbar-nav li a {
+ line-height: 25px;
+}
+
+/* Give top-level navigation items a line-height that matches the img height */
+.navbar-nav > li > a {
+ line-height: 45px;
+}
+
+.navbar-collapse.in {
+  overflow: visible;
+}
+
+button {
+  text-transform: uppercase;
+}
+
+.btn-lg, .btn-group-lg>.btn {
+  font-size: 1em;
+}
+
+header {
+  .navbar {
+    margin-bottom: 0;
+    border-radius: 0 !important;
+  }
+
+  .navbar-form {
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    @media (min-width: $screen-sm-min) {
+      .form-control {
+        width: 230px;
+      }
+    }
+
+  }
+}
+
+.text-upper {
+  text-transform: uppercase;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.text-lg {
+  font-size: 1.2em;
+}
+
+.text-xl {
+  font-size: 1.4em;
+}
+
+.text-ellipsis {
+  white-space: nowrap;
+  width: 100%;                   
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
