@@ -19,10 +19,13 @@ export class BackdropComponent {
   loaded: Boolean;
 
   constructor(private _elementRef:ElementRef){
+    this.loaded = false;
+
     var img = jQuery(this._elementRef.nativeElement).find('.backdrop-image');
 
     img.on('load', () => {
       this.loaded = true;
     });
   }
+
 }

@@ -1,0 +1,14 @@
+<div class="media">
+  <div class="pull-left">
+  <a href="person/{{person.id}}">
+    <img *ngIf="person.profile_path" class="media-object" width="92" height="138" src="{{API_SETTINGS.baseImageUrl}}w92/{{person.profile_path}}" alt="{{person.name}}">
+    <img *ngIf="!person.profile_path" mdb-holder="holder.js/92x138?theme=sky&text" [text]="person.name">
+  </a>
+  </div>
+  <div class="media-body">
+    <a href="person/{{person.id}}">
+      <p class="h4" style="margin:0 0 5px 0; word-break: break-word;">{{person.name}}</p>
+    </a>
+    <p *ngIf="person.character" class="small text-muted">{{person.character}}</p>
+  </div>
+</div>

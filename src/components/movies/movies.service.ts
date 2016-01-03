@@ -3,6 +3,9 @@ import {Http, URLSearchParams} from 'angular2/http';
 import * as AppConstants from '../app/app.constants';
 import * as PrivateConstants from '../../private';
 
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/delay';
+
 declare var _: any;
 
 @Injectable()
@@ -37,8 +40,16 @@ export class MoviesService {
     }
   }
 
-  getMovies(type:string = 'popular', page:number = 1) {
-    var url = AppConstants.API_SETTINGS.url + '/movie/' + type;
+  getMovies(type, page:number = 1) {
+    var url = AppConstants.API_SETTINGS.url + '/movie/' + (type || 'popular');
+
+    var params = { page: page };
+
+    return this.getMovieCollection(url, params);
+  }
+
+  getMovieGenres(genreId, page: number = 1) {
+    var url = AppConstants.API_SETTINGS.url + '/genre/' + genreId + '/movies';
 
     var params = { page: page };
 
@@ -52,7 +63,7 @@ export class MoviesService {
 
     return this._http.get(url, {
       search: urlParams
-    });
+    }).map(res => res.json());
   }
 
   // We can use these callbacks for all movie collections

@@ -1,6 +1,6 @@
 import {Component, OnInit} from 'angular2/core';
 import {MoviesService} from '../movies/movies.service';
-import {ShowcaseItemComponent} from  '../movies/showcase_item.component';
+import {ShowcaseItemComponent} from  './showcase_item.component';
 import {LoadingComponent} from '../common/loading/loading.component';
 
 @Component({
@@ -23,11 +23,11 @@ export class DashboardComponent implements OnInit {
 
     this._moviesService.getMovies('popular').subscribe(res => {
       this.loading = false;
-      this.popularMovies = res.json().results;
+      this.popularMovies = res.results;
     });
 
     this._moviesService.getMovies('top_rated').subscribe(res => {
-      this.highestRatedMovies = res.json().results;
+      this.highestRatedMovies = res.results;
     });
   }
 

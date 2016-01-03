@@ -3,6 +3,13 @@ export const API_SETTINGS = {
   baseImageUrl: 'https://image.tmdb.org/t/p/'
 }
 
+export const MOVIE_TYPES_MAP = {
+  'popular'    : 'Popular',
+  'top_rated'  : 'Top Rated',
+  'upcoming'   : 'Upcoming',
+  'now_playing': 'Now Playing'
+}
+
 export const MOVIE_GENRES = [
   {
     label: "Action",

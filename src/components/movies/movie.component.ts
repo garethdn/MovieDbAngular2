@@ -1,36 +1,39 @@
 import {Component, OnInit} from 'angular2/core';
-import {RouteParams} from 'angular2/router';
+import {RouteParams, RouterLink} from 'angular2/router';
 import {MoviesService} from './movies.service';
 import {LoadingComponent} from '../common/loading/loading.component';
 import {BackdropComponent} from '../common/backdrop/backdrop.component';
-import * as AppConstants from '../app/app.constants';
+import {PersonListItemComponent} from '../people/person_list_item.component';
+import {ImgHolderDirective} from '../common/img_holder/img_holder.directive';
+import {CustomDatePipe} from '../common/pipes/custom_data.pipe';
+import {BaseComponent} from '../common/base.component';
 
 @Component({
   selector: 'movie',
   templateUrl: 'dist/components/movies/movie.component.html',
-  directives: [LoadingComponent, BackdropComponent]
+  pipes: [CustomDatePipe],
+  directives: [LoadingComponent, BackdropComponent, PersonListItemComponent, ImgHolderDirective, RouterLink]
 })
 
-export class MovieComponent implements OnInit {
+export class MovieComponent extends BaseComponent implements OnInit {
 
   movie: Object = {};
-  API_SETTINGS = AppConstants.API_SETTINGS;
-  loading: Boolean;
-  subscriptions: any[];
 
-  constructor(private _routeParams: RouteParams,
-    private _moviesService: MoviesService) { }
+  constructor(private _routeParams: RouteParams, 
+    private _moviesService: MoviesService) { 
+    super();
+  }
 
   ngOnInit() {
-    console.log('in movie component', this._routeParams.params);
-
     this.loading = true;
 
-    var movieSubscription = this._moviesService.getMovie(this._routeParams.get('id'))
+    var sub = this._moviesService.getMovie(this._routeParams.get('id'))
       .subscribe(res => {
         this.loading = false;
         this.movie = res;
       })
+
+    this.addSubscription(sub);
   }
 
 }

@@ -31,10 +31,10 @@
               Movies <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="movies/popular">Popular</a></li>
-              <li><a href="movies/top_rated">Top Rated</a></li>
-              <li><a href="movies/upcoming">Upcoming</a></li>
-              <li><a href="movies/now_playing">Now playing</a></li>
+              <li><a [routerLink]="['MoviesByType', { type: 'popular' }]">Popular</a></li>
+              <li><a [routerLink]="['MoviesByType', { type: 'top_rated' }]">Top Rated</a></li>
+              <li><a [routerLink]="['MoviesByType', { type: 'upcoming' }]">Upcoming</a></li>
+              <li><a [routerLink]="['MoviesByType', { type: 'now_playing' }]">Now playing</a></li>
             </ul>
           </li>
           
@@ -44,7 +44,7 @@
             </a>
             <ul class="dropdown-menu">
               <li *ngFor="#genre of MOVIE_GENRES">
-                <a href="movies/genre/{{genre.id}}">{{genre.label}}</a>                  
+                <a [routerLink]="['MoviesByGenre', { genreId: genre.id }]">{{genre.label}}</a>
               </li>
             </ul>
           </li>
