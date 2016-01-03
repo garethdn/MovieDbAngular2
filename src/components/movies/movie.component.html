@@ -37,7 +37,7 @@
         </div>
         <div class="col-md-4 col-xs-6 col-sm-5 col-xxs-12">
           <div class="text-center" style="background-color: rgba(223, 105, 26, 0.6); padding: 20px;">
-            <p class="text-bold" style="font-size: 6.3em; margin:0;">{{movie.vote_average}}</p>
+            <p class="text-bold" style="font-size: 6.3em; margin:0;">{{movie.vote_average | number:'1.1-1'}}</p>
             <p class="text-upper small" style="margin:0;">From {{movie.vote_count}} votes</p>
           </div>
 

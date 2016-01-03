@@ -5,7 +5,7 @@ import {LoadingComponent} from '../common/loading/loading.component';
 import {BackdropComponent} from '../common/backdrop/backdrop.component';
 import {PersonListItemComponent} from '../people/person_list_item.component';
 import {ImgHolderDirective} from '../common/img_holder/img_holder.directive';
-import {CustomDatePipe} from '../common/pipes/custom_data.pipe';
+import {CustomDatePipe} from '../common/pipes/custom_date.pipe';
 import {BaseComponent} from '../common/base.component';
 
 @Component({
