@@ -26,6 +26,8 @@ export class MoviesService {
       search: urlParams
     }).map(res => {
       return onMovieSuccess(res.json());
+    }, res => {
+      return onMovieError(res.json());
     });
 
     function onMovieSuccess(data) {

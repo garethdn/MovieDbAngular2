@@ -31,6 +31,8 @@ export class MovieComponent extends BaseComponent implements OnInit {
       .subscribe(res => {
         this.loading = false;
         this.movie = res;
+      }, err => {
+        console.warn('Oops...', err.status);
       })
 
     this.addSubscription(sub);
